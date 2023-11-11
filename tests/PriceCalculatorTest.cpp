@@ -37,3 +37,15 @@ TEST(PriceCalculator, should_return_80_when_gien_cash_back_and_price_100)
     //then
     EXPECT_EQ(80, cash);
 }
+
+TEST(PriceCalculator, should_return_90_when_gien_cash_percentoff_and_price_90)
+{
+    //given
+    PriceCal::PriceCalculator priceCalculator;
+
+    //when
+    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_PERCENTOFF,90.0);
+
+    //then
+    EXPECT_EQ(90, cash);
+}
