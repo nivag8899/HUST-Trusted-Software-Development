@@ -6,7 +6,7 @@ double PriceCalculator::AcceptCash(DiscountType type, double money)const noexcep
     switch (type) {
         case DiscountType::CASE_NORMAL:
             break;
-        case DiscountType::CASE_PERCENTOFF:
+        case DiscountType::CASE_90PERCENTOFF:
             money *=0.9;
             break;
         case DiscountType::CASE_BACK:
