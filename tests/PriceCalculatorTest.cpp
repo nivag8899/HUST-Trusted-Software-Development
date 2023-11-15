@@ -38,16 +38,16 @@ TEST(PriceCalculator, should_return_72_when_given_cash_80percentoff_and_price_90
     EXPECT_EQ(72, cash);
 }
 
-TEST(PriceCalculator, should_return_72_when_given_cash_70percentoff_and_price_90)
+TEST(PriceCalculator, should_return_70_when_given_cash_70percentoff_and_price_100)
 {
     //given
     PriceCal::PriceCalculator priceCalculator;
 
     //when
-    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_70PERCENTOFF, 90.0);
+    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_70PERCENTOFF, 100.0);
 
     //then
-    EXPECT_EQ(63, cash);
+    EXPECT_EQ(70, cash);
 }
 
 TEST(PriceCalculator, should_return_90_when_given_cash_back_and_price_90)
