@@ -1,7 +1,5 @@
 #include "PriceCalculator.h"
-
-
-
+#include "Discount.h"
 #include <unordered_map>
 
 namespace PriceCalc
