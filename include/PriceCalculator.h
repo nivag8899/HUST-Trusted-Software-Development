@@ -14,5 +14,11 @@ namespace PriceCalc
     {
     public:
         double AcceptCash(const DiscountType discountType, const double money) const noexcept;
+
+    private:
+        double Normal(const double money) const noexcept{
+            return money;
+        }
+
     };
 }  // namespace PriceCalc

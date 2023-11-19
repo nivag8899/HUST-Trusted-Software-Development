@@ -10,7 +10,7 @@ namespace PriceCalc
 
         switch (discountType) {
             case DiscountType::CASH_NORMAL: {
-                cash = money;
+                cash = Normal(money);
                 break;
             }
 
