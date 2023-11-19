@@ -1,6 +1,7 @@
 #include "PriceCalculator.h"
 
 #include <cmath>
+#include <memory>
 
 namespace PriceCalc
 {
@@ -10,13 +11,14 @@ namespace PriceCalc
 
         switch (discountType) {
             case DiscountType::CASH_NORMAL: {
-                cash = Normal(money);
+                std::unique_ptr<Normal> normal = std::make_unique<Normal>();
+                cash = normal->AcceptCash(money);
                 break;
             }
 
             case DiscountType::CASH_PERCENTOFF_10: {
-
-                cash = PercentOff(money);
+                std::unique_ptr<PercentOff> percentoff = std::make_unique<PercentOff>();
+                cash = percentoff->AcceptCash(money);
                 break;
             }
 
@@ -35,7 +37,8 @@ namespace PriceCalc
             }
 
             case DiscountType::CASH_BACK: {
-                cash = CashBack(money);
+                std::unique_ptr<CashBack> cashback = std::make_unique<CashBack>();
+                cash = cashback->AcceptCash(money);
                 break;
             }
         }
