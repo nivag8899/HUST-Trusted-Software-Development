@@ -35,11 +35,7 @@ namespace PriceCalc
             }
 
             case DiscountType::CASH_BACK: {
-                const double threshold = 100.0;
-                const double cashback = 20.0;
-
-                cash = money - std::floor(money / threshold) * cashback;
-
+                cash = CashBack(money);
                 break;
             }
         }
