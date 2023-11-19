@@ -1,8 +1,10 @@
 #pragma once
 
 #include <cmath>
+#include <memory>
 
-enum class DiscountType {
+enum class DiscountType
+{
     CASH_NORMAL,
     CASH_PERCENTOFF_10,
     CASH_PERCENTOFF_20,
@@ -16,32 +18,48 @@ namespace PriceCalc
     {
     public:
         double AcceptCash(const DiscountType discountType, const double money) const noexcept;
-    };
 
-    class Normal final
-    {
-    public:
-        double AcceptCash(const double money) const noexcept{
-            return money;
-        }
-    };
+    private:
+        class Discount
+        {
+        public:
+            virtual ~Discount(){};
+            virtual double AcceptCash(const double money) const noexcept = 0;
+        };
 
-    class PercentOff final
-    {
-    public:
-        double AcceptCash(const double money) const noexcept{
-            const double discontRate = 0.9;
-            return money * discontRate;
-        }
-    };
+        class Normal final : public Discount
+        {
+        public:
+            double AcceptCash(const double money) const noexcept override
+            {
+                return money;
+            }
+        };
 
-    class CashBack final
-    {
-    public:
-        double AcceptCash(const double money) const noexcept{
-            const double threshold = 100.0;
-            const double cashback = 20.0;
-            return money - std::floor(money / threshold) * cashback;
-        }
+        class PercentOff final : public Discount
+        {
+        public:
+            explicit PercentOff(const double rate) : rate(rate)
+            {
+            }
+            double AcceptCash(const double money) const noexcept override
+            {
+                return money * rate;
+            }
+
+        private:
+            const double rate;
+        };
+
+        class CashBack final : public Discount
+        {
+        public:
+            double AcceptCash(const double money) const noexcept override
+            {
+                const double threshold = 100.0;
+                const double cashback = 20.0;
+                return money - std::floor(money / threshold) * cashback;
+            }
+        };
     };
-}  // namespace PriceCalc
+} // namespace PriceCalc
