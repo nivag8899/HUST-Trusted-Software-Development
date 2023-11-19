@@ -20,5 +20,8 @@ namespace PriceCalc
             return money;
         }
 
+        double PercentOff(const double money) const noexcept{
+            return money * 0.9;
+        }
     };
 }  // namespace PriceCalc
