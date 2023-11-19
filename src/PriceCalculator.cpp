@@ -1,24 +1,50 @@
 #include "PriceCalculator.h"
 
-using namespace PriceCal;
-double PriceCalculator::AcceptCash(DiscountType type, double money)const noexcept {
-    int CASH_BACK_cnt = 0;
-    switch (type) {
-        case DiscountType::CASE_NORMAL:
-            break;
-        case DiscountType::CASE_90PERCENTOFF:
-            money *=0.9;
-            break;
-        case DiscountType::CASE_80PERCENTOFF:
-            money *=0.8;
-            break;
-        case DiscountType::CASE_70PERCENTOFF:
-            money *=0.7;
-            break;
-        case DiscountType::CASE_BACK:
-            CASH_BACK_cnt = money / 100;
-            money -=20 * CASH_BACK_cnt;
-            break;
+#include <cmath>
+
+namespace PriceCalc
+{
+    double PriceCalculator::AcceptCash(const DiscountType discountType, const double money) const noexcept
+    {
+        double cash = 0.0;
+
+        switch (discountType) {
+            case DiscountType::CASH_NORMAL: {
+                cash = money;
+                break;
+            }
+
+            case DiscountType::CASH_PERCENTOFF_10: {
+                const double discountRate = 0.9;
+
+                cash = money * discountRate;
+                break;
+            }
+
+            case DiscountType::CASH_PERCENTOFF_20: {
+                const double discountRate = 0.8;
+
+                cash = money * discountRate;
+                break;
+            }
+
+            case DiscountType::CASH_PERCENTOFF_30: {
+                const double discountRate = 0.7;
+
+                cash = money * discountRate;
+                break;
+            }
+
+            case DiscountType::CASH_BACK: {
+                const double threshold = 100.0;
+                const double cashback = 20.0;
+
+                cash = money - std::floor(money / threshold) * cashback;
+
+                break;
+            }
+        }
+
+        return cash;
     }
-    return money;
-}
+}  // namespace PriceCalc

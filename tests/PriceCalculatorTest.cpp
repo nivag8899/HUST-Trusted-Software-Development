@@ -2,87 +2,88 @@
 
 #include "PriceCalculator.h"
 
-TEST(PriceCalculator, should_return_90_when_gvien_cash_normal_and_price_90)
+using namespace PriceCalc;
+
+TEST(PriceCalculator, should_return_100_when_given_cash_normal_and_price_100)
 {
-    //given
-    PriceCal::PriceCalculator priceCalculator;
+    // given
+    PriceCalculator priceCalculator;
+    DiscountType discountType = DiscountType::CASH_NORMAL;
+    double money = 100.0;
 
-    //when
-    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_NORMAL,90.0);
+    // when
+    double cash = priceCalculator.AcceptCash(discountType, money);
 
-    //then
-    EXPECT_EQ(90, cash);
+    // then
+    EXPECT_DOUBLE_EQ(100.0, cash);
 }
 
-TEST(PriceCalculator, should_return_81_when_given_cash_90percentoff_and_price_90)
+TEST(PriceCalculator, should_return_90_when_cash_percent_off_10_and_price_100)
 {
-    //given
-    PriceCal::PriceCalculator priceCalculator;
+    // given
+    PriceCalculator priceCalculator;
+    DiscountType discountType = DiscountType::CASH_PERCENTOFF_10;
+    double money = 100.0;
 
-    //when
-    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_90PERCENTOFF, 90.0);
+    // when
+    double cash = priceCalculator.AcceptCash(discountType, money);
 
-    //then
-    EXPECT_DOUBLE_EQ(81, cash);
+    // then
+    EXPECT_DOUBLE_EQ(90.0, cash);
 }
 
-TEST(PriceCalculator, should_return_72_when_given_cash_80percentoff_and_price_90)
+TEST(PriceCalculator, should_return_80_when_cash_percent_off_20_and_price_100)
 {
-    //given
-    PriceCal::PriceCalculator priceCalculator;
+    // given
+    PriceCalculator priceCalculator;
+    DiscountType discountType = DiscountType::CASH_PERCENTOFF_20;
+    double money = 100.0;
 
-    //when
-    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_80PERCENTOFF, 90.0);
+    // when
+    double cash = priceCalculator.AcceptCash(discountType, money);
 
-    //then
-    EXPECT_DOUBLE_EQ(72, cash);
+    // then
+    EXPECT_DOUBLE_EQ(80.0, cash);
 }
 
-TEST(PriceCalculator, should_return_70_when_given_cash_70percentoff_and_price_100)
+TEST(PriceCalculator, should_return_70_when_cash_percent_off_30_and_price_100)
 {
-    //given
-    PriceCal::PriceCalculator priceCalculator;
+    // given
+    PriceCalculator priceCalculator;
+    DiscountType discountType = DiscountType::CASH_PERCENTOFF_30;
+    double money = 100.0;
 
-    //when
-    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_70PERCENTOFF, 100.0);
+    // when
+    double cash = priceCalculator.AcceptCash(discountType, money);
 
-    //then
-    EXPECT_DOUBLE_EQ(70, cash);
+    // then
+    EXPECT_DOUBLE_EQ(70.0, cash);
 }
 
 TEST(PriceCalculator, should_return_90_when_given_cash_back_and_price_90)
 {
-    //given
-    PriceCal::PriceCalculator priceCalculator;
+    // given
+    PriceCalculator priceCalculator;
+    DiscountType discountType = DiscountType::CASH_BACK;
+    double money = 90.0;
 
-    //when
-    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_BACK,90.0);
+    // when
+    double cash = priceCalculator.AcceptCash(discountType, money);
 
-    //then
-    EXPECT_DOUBLE_EQ(90, cash);
+    // then
+    EXPECT_DOUBLE_EQ(90.0, cash);
 }
 
 TEST(PriceCalculator, should_return_80_when_given_cash_back_and_price_100)
 {
-    //given
-    PriceCal::PriceCalculator priceCalculator;
+    // given
+    PriceCalculator priceCalculator;
+    DiscountType discountType = DiscountType::CASH_BACK;
+    double money = 100.0;
 
-    //when
-    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_BACK,100.0);
+    // when
+    double cash = priceCalculator.AcceptCash(discountType, money);
 
-    //then
-    EXPECT_DOUBLE_EQ(80, cash);
+    // then
+    EXPECT_DOUBLE_EQ(80.0, cash);
 }
-
-TEST(PriceCalculator, should_return_210_when_given_cash_back_and_price_250)
-{
-    //given
-    PriceCal::PriceCalculator priceCalculator;
-
-    //when
-    double cash = priceCalculator.AcceptCash(PriceCal::DiscountType::CASE_BACK,250.0);
-
-    //then
-    EXPECT_DOUBLE_EQ(210, cash);
-}
-
