@@ -9,9 +9,12 @@
 
 #pragma once
 
+#include <stdio.h>
 #include <cmath>
+#include <functional>
 
-namespace  PriceCalc{
+namespace  PriceCalc
+{
     class Discount
     {
     public:
@@ -22,6 +25,10 @@ namespace  PriceCalc{
     class Normal final : public Discount
     {
     public:
+        explicit Normal()
+        {
+            printf("call\n");
+        }
         double AcceptCash(const double money) const noexcept override
         {
             return money;

@@ -3,8 +3,6 @@
 #include <cmath>
 #include <memory>
 
-
-
 namespace PriceCalc
 {
     enum class DiscountType
