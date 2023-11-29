@@ -9,6 +9,7 @@ ADD_COMPILE_OPTIONS("-Werror")
 ADD_LIBRARY(training ${SOURCE}
         ../include/Discount.h
         ../include/DiscountManager.h
-        DiscounManager.cpp)
+        DiscounManager.cpp
+        Discount.cpp)
 
 TARGET_INCLUDE_DIRECTORIES(training PUBLIC "${INCLUDE}")
