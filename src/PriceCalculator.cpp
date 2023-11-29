@@ -1,24 +1,18 @@
 #include "PriceCalculator.h"
+#include "DiscountManager.h"
+#include "Discount.h"
 
-using namespace PriceCal;
-double PriceCalculator::AcceptCash(DiscountType type, double money)const noexcept {
-    int CASH_BACK_cnt = 0;
-    switch (type) {
-        case DiscountType::CASE_NORMAL:
-            break;
-        case DiscountType::CASE_90PERCENTOFF:
-            money *=0.9;
-            break;
-        case DiscountType::CASE_80PERCENTOFF:
-            money *=0.8;
-            break;
-        case DiscountType::CASE_70PERCENTOFF:
-            money *=0.7;
-            break;
-        case DiscountType::CASE_BACK:
-            CASH_BACK_cnt = money / 100;
-            money -=20 * CASH_BACK_cnt;
-            break;
+namespace PriceCalc {
+    double PriceCalculator::AcceptCash(const DiscountType discountType, const double money) const noexcept {
+        DiscountManager& discountManager = DiscountManager::GetInstance();
+        DiscountStrategy discountStrategy = discountManager.GetDiscountStrategy(discountType);
+
+        // Check if the strategy is valid
+        if (discountStrategy) {
+            return discountStrategy(money);
+        } else {
+            // Handle unsupported or missing discount strategy
+            return money;
+        }
     }
-    return money;
-}
+} // namespace PriceCalc
