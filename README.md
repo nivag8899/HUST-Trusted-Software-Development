@@ -1,4 +1,4 @@
-# Huawei_cpp_training_1
+# 可信软件开发
 这是可信软件开发 1-2 次课的课后作业最终版本。
 在第一次课中，我们尝试了测试驱动开发，通过先编写测试用例，然后基于测试用例进行开发，体验了这一开发方法。
 第二次课的主要任务是使用 unordered_map 代替 switch-case，并使几个 DiscountType 类继承自 Discount 基类。
